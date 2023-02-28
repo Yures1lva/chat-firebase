@@ -4,7 +4,8 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class AuthForm extends StatefulWidget {
-  const AuthForm({super.key});
+  final void Function(AuthFormData) onSubmit;
+  const AuthForm({super.key, required this.onSubmit});
 
   @override
   State<AuthForm> createState() => _AuthFormState();
@@ -15,7 +16,10 @@ class _AuthFormState extends State<AuthForm> {
   final _formData = AuthFormData();
 
   void _submit() {
-    _formkey.currentState?.validate();
+    final isValid = _formkey.currentState?.validate() ?? false;
+    if (!isValid) return;
+
+    widget.onSubmit(_formData);
   }
 
   @override
@@ -34,12 +38,24 @@ class _AuthFormState extends State<AuthForm> {
                     initialValue: _formData.name,
                     onChanged: (name) => _formData.name = name,
                     decoration: InputDecoration(labelText: 'Name'),
+                    validator: (_name) {
+                      final name = _name ?? '';
+                      if (name.trim().length < 5) {
+                        return 'Nome deve ter no minímo 5 caractere';
+                      }
+                    },
                   ),
                 TextFormField(
                   key: ValueKey("email"),
                   initialValue: _formData.email,
                   onChanged: (email) => _formData.email = email,
                   decoration: InputDecoration(labelText: 'E-mail'),
+                  validator: (_email) {
+                    final email = _email ?? '';
+                    if (!email.contains('@')) {
+                      return 'Email informado não é válido';
+                    }
+                  },
                 ),
                 TextFormField(
                   key: ValueKey("password"),
@@ -49,6 +65,12 @@ class _AuthFormState extends State<AuthForm> {
                   decoration: InputDecoration(
                     labelText: 'Password',
                   ),
+                  validator: (_password) {
+                    final password = _password ?? '';
+                    if (password.length < 6) {
+                      return 'Senha deve ter no mínimo 6 caracteres';
+                    }
+                  },
                 ),
                 SizedBox(
                   height: 12,
