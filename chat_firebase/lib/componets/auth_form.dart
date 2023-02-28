@@ -3,8 +3,6 @@ import 'dart:io';
 import 'package:chat_firebase/componets/user_image_picker.dart';
 import 'package:chat_firebase/models/auth_form_data.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class AuthForm extends StatefulWidget {
   final void Function(AuthFormData) onSubmit;
@@ -43,7 +41,7 @@ class _AuthFormState extends State<AuthForm> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(20),
+      margin: const EdgeInsets.all(20),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Form(
@@ -54,10 +52,10 @@ class _AuthFormState extends State<AuthForm> {
                   UserImagePicker(onImagePick: _handleImagePick),
                 if (_formData.isSingup)
                   TextFormField(
-                    key: ValueKey("name"),
+                    key: const ValueKey("name"),
                     initialValue: _formData.name,
                     onChanged: (name) => _formData.name = name,
-                    decoration: InputDecoration(labelText: 'Name'),
+                    decoration: const InputDecoration(labelText: 'Name'),
                     validator: (_name) {
                       final name = _name ?? '';
                       if (name.trim().length < 5) {
