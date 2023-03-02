@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:chat_firebase/componets/user_image_picker.dart';
-import 'package:chat_firebase/models/auth_form_data.dart';
+import 'package:chat_firebase/core/models/auth_form_data.dart';
 import 'package:flutter/material.dart';
 
 class AuthForm extends StatefulWidget {
@@ -15,6 +15,10 @@ class AuthForm extends StatefulWidget {
 class _AuthFormState extends State<AuthForm> {
   final _formkey = GlobalKey<FormState>();
   final _formData = AuthFormData();
+
+  void _handleImagePick(File image) {
+    _formData.image = image;
+  }
 
   void _showError(String msg) {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -32,10 +36,6 @@ class _AuthFormState extends State<AuthForm> {
       return _showError("Imagem não selecionada");
     }
     widget.onSubmit(_formData);
-  }
-
-  void _handleImagePick(File image) {
-    _formData.image = image;
   }
 
   @override
