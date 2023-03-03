@@ -56,6 +56,7 @@ class _AuthFormState extends State<AuthForm> {
                     initialValue: _formData.name,
                     onChanged: (name) => _formData.name = name,
                     decoration: const InputDecoration(labelText: 'Name'),
+                    // ignore: body_might_complete_normally_nullable, no_leading_underscores_for_local_identifiers
                     validator: (_name) {
                       final name = _name ?? '';
                       if (name.trim().length < 5) {
@@ -64,10 +65,13 @@ class _AuthFormState extends State<AuthForm> {
                     },
                   ),
                 TextFormField(
+                  // ignore: prefer_const_constructors
                   key: ValueKey("email"),
                   initialValue: _formData.email,
                   onChanged: (email) => _formData.email = email,
+                  // ignore: prefer_const_constructors
                   decoration: InputDecoration(labelText: 'E-mail'),
+                  // ignore: body_might_complete_normally_nullable, no_leading_underscores_for_local_identifiers
                   validator: (_email) {
                     final email = _email ?? '';
                     if (!email.contains('@')) {
@@ -76,13 +80,14 @@ class _AuthFormState extends State<AuthForm> {
                   },
                 ),
                 TextFormField(
-                  key: ValueKey("password"),
+                  key: const ValueKey("password"),
                   initialValue: _formData.password,
                   onChanged: (password) => _formData.password = password,
                   obscureText: true,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Password',
                   ),
+                  // ignore: body_might_complete_normally_nullable, no_leading_underscores_for_local_identifiers
                   validator: (_password) {
                     final password = _password ?? '';
                     if (password.length < 6) {
@@ -90,7 +95,7 @@ class _AuthFormState extends State<AuthForm> {
                     }
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 12,
                 ),
                 ElevatedButton(

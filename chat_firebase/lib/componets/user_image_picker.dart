@@ -1,9 +1,5 @@
 import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:image_picker/image_picker.dart';
 
 class UserImagePicker extends StatefulWidget {
@@ -51,10 +47,10 @@ class _UserImagePicker extends State<UserImagePicker> {
                   Icons.image,
                   color: Theme.of(context).primaryColor,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                Text("Adicionar Imagem")
+                const Text("Adicionar Imagem")
               ],
             ))
       ],
