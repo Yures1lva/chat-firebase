@@ -7,13 +7,18 @@ import 'package:chat_firebase/core/services/auth/auth_service.dart';
 import '../../models/chat_user.dart';
 
 class AuthMockServie implements AuthService {
+
+  static final _defaultuser = ChatUser(name: "name", email: "arroz@gmail.com", id: "1", imageUrl: "assets/image/avatar.png",);
+
   // ignore: prefer_final_fields
-  static Map<String, ChatUser> _users = {};
+  static Map<String, ChatUser> _users = {
+    _defaultuser.email: _defaultuser,
+  };
   static ChatUser? _currentUser;
   static MultiStreamController<ChatUser?>? _controller;
   static final _userStream = Stream<ChatUser?>.multi((controller) {
     _controller = controller;
-    _updateUser(null);
+    _updateUser(_defaultuser);
   });
 
   @override
@@ -37,7 +42,7 @@ class AuthMockServie implements AuthService {
         name: name,
         email: email,
         id: Random().nextDouble().toString(),
-        imageUrl: image?.path ?? '/assets/images/...');
+        imageUrl: image?.path ?? 'assets/images/avatar.png');
 
     _users.putIfAbsent(email, () => newUser);
     _updateUser(newUser);

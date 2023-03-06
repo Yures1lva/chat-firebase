@@ -1,5 +1,5 @@
 import 'package:chat_firebase/core/models/chat_user.dart';
-import 'package:chat_firebase/core/services/auth/auth_mock_service.dart';
+import 'package:chat_firebase/core/services/auth/auth_service.dart';
 import 'package:chat_firebase/pages/auth_page.dart';
 import 'package:chat_firebase/pages/chat_page.dart';
 import 'package:chat_firebase/pages/loading_page.dart';
@@ -12,7 +12,7 @@ class AuthAppPAge extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: StreamBuilder<ChatUser?>(
-        stream: AuthMockServie().userChanges,
+        stream: AuthService().userChanges,
         builder: ((context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const LoadingPage();
